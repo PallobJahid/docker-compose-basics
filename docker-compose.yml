@@ -1,0 +1,22 @@
+services:
+  api:
+    depends_on:
+      - db
+    build: ./backend
+    ports:
+      - 3001:3001
+    volumes:
+      - F:\web_design_projects\docker-practice-3\backend:/app:cached
+    environment:
+      DB_URL: mongodb://db/testUserData
+    command: 'nodemon server.js'
+
+  db:
+    image: mongo:4.0.28-xenial
+    ports:
+      - 27017:27017
+    volumes:
+      - testAppVolume:/data/db
+
+volumes:
+  testAppVolume:
